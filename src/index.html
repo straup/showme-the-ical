@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>show me the ical (debug)</title>
+		<script type="text/javascript" src="prettyprint.js"></script>
+		<script type="text/javascript" src="iso8601.min.js"></script>
+		<script type="text/javascript" src="ijp-0.5.js"></script>
+		<script type="text/javascript" src="smi_init.js"></script>
+		<script type="text/javascript" src="smi_form.js"></script>
+		<script type="text/javascript" src="smi_load.js"></script>
+		<script type="text/javascript" src="smi_ical.js"></script>
+		<script type="text/javascript" src="smi_events.js"></script>
+	</head>
+	<body onload="smi_init();">
+		<form id="smi_form" onsubmit="smi_form_handler();return false;">
+			<label for="load_file">load one or more documents from your computer</label><br />
+			<input type="file" id="load_file" size="40" multiple /><br /><br />
+			<label for="load_uri">load a document from the web</label><br />
+			<input type="text" id="load_uri" size="50" /><br /><br />
+			<div id="load_buttons">
+			<input type="submit" value="SHOW ME NOW!"/>
+			<input type="submit" onclick="smi_form_toggle('close'); return false;" value="OR NOT..."/>
+			</div>
+		</form>
+		<div id="smi_events">
+		</div>
+	</body>
+</html>
