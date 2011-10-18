@@ -1,41 +1,41 @@
-function smi_events_display(events){
+function smi_events_display(events, skip_old){
 
 	var now = new Date();
 	var count = events.length;
+
+	var list = document.createElement('ul');
 
 	for (var i=0; i < count; i++){
 
 		var e = events[i];
 		
 		var start = e.dtstart.value;
-		var end = e.dtend.value;
 
-		var yyyy = start.substring(0, 4);
-		var mm = start.substring(4, 6);
-		var dd = start.substring(6, 8);
+		var start_y = start.substring(0, 4);
+		var start_m = start.substring(4, 6);
+		var start_d = start.substring(6, 8);
 
-		var ymd = yyyy + "-" + mm + "-" + dd;
+		var start_ymd = start_y + "-" + start_m + "-" + start_d;
 
-		// var h = dt.substring(9, 11);
-		// var m = dt.substring(11, 13);
-		// var s = dt.substring(13, 15);
-		// var hms = h + ":" + m + ":" + s;
+		var start_ts = Date.parse(start_ymd);
 
-		var iso = ymd;
-
-		var ts = Date.parse(iso);
-
-		if (ts < now.getTime()){
+		if ((skip_old) && (start_ts < now.getTime())){
 			continue;
 		}
 
-		var uid = e.uid.value;
-		var loc = e.location.value;
+		var html = smi_format_event(e);
 
-		var pp = prettyPrint(e);
+		var item = document.createElement('li');
 
-		document.getElementById('smi_events').appendChild(pp);
+		item.appendChild(html);
+		list.appendChild(item);
 	}
 
-	smi_form_toggle();
+	if (list.children.length){
+
+		var events = document.getElementById('smi_events');
+		events.appendChild(list);
+		smi_form_toggle();
+	}
+
 }

@@ -3,6 +3,9 @@ function smi_form_handler(){
 	var url = document.getElementById("load_url");
 	var file = document.getElementById("load_file");
 
+	var skip_old = document.getElementById("skip_old");
+	skip_old = skip_old.checked;
+
 	var something = 0;
 
 	// fix me...WTF
@@ -13,7 +16,7 @@ function smi_form_handler(){
 		something = 1;
 
 		if (url.value.indexOf("http") == 0){
-			off_load_url(url.value);
+			off_load_url(url.value, skip_old);
 			url.value = '';
 		}
 
@@ -25,7 +28,7 @@ function smi_form_handler(){
 
 	if ((has_filereader) && (file.files.length)){
 		something = 1;
-		smi_load_files(file.files);
+		smi_load_files(file.files, skip_old);
 		file.value = '';
 	}
 

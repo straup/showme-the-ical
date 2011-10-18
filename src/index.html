@@ -9,6 +9,8 @@
 		<script type="text/javascript" src="smi_load.js"></script>
 		<script type="text/javascript" src="smi_ical.js"></script>
 		<script type="text/javascript" src="smi_events.js"></script>
+		<script type="text/javascript" src="smi_format.js"></script>
+		<link rel="stylesheet" type="text/css" href="smi.css" />
 	</head>
 	<body onload="smi_init();">
 		<form id="smi_form" onsubmit="smi_form_handler();return false;">
@@ -16,6 +18,13 @@
 			<input type="file" id="load_file" size="40" multiple /><br /><br />
 			<label for="load_uri">load a document from the web</label><br />
 			<input type="text" id="load_uri" size="50" /><br /><br />
+
+			<label for="skip_old">skip old events</label>
+			<input type="checkbox" id="skip_old" /><br /><br />
+
+			<label for="cache_local">cache_locally</label>
+			<input type="checkbox" id="cache_local" /><br /><br />
+
 			<div id="load_buttons">
 			<input type="submit" value="SHOW ME NOW!"/>
 			<input type="submit" onclick="smi_form_toggle('close'); return false;" value="OR NOT..."/>
