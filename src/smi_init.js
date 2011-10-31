@@ -3,7 +3,9 @@ var has_localstorage = 1;
 
 function smi_init(){
 
-	// just use modernizr ?
+	// just use modernizr? doesn't appear to have checks
+	// for the File API so it's not clear what the benefit
+	// would be (20111031/straup)
 
 	// safari doesn't support FileReader at all but Chrome does
 	// except for the part where it won't read local files...wtf
@@ -28,6 +30,7 @@ function smi_init(){
 	has_localstorage = (typeof(localStorage) !== "undefined") ? 1 : 0;	
 
 	if (! has_localstorage){
+
 		var input  = document.getElementById("cache_local");
 		input.setAttribute("disabled", "disabled");
 
@@ -39,5 +42,23 @@ function smi_init(){
 
 	}
 
+	// put me in a separate library?
+
+	if (has_localstorage){
+
+		var calendar_list = localStorage.getItem('smi_calendars');		
+		var calendars = {};
+
+		if (calendar_list){
+			calendar_list = JSON.parse(calendars);
+			calendar_count = calendar_list.length;
+
+			for (var i=0; i < calendar_count; i++){
+				var calendar_name = calendar_list[i];
+				var calendar_ics = localStorage.getItem(calendar_name);
+				calendars[ calendar_name ] = calendar_ics;
+			}
+		}
+	}
 
 }
