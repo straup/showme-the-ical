@@ -11,9 +11,14 @@ function smi_format_event(e){
 	var uid = e.uid.value;
 	var loc = e.location.value;
 	var desc = e.description.value;
+	var summ = e.summary.value;
 
 	var anchor = document.createElement('a');
 	anchor.setAttribute('name', uid);
+
+	var what = document.createElement('div');
+	what.setAttribute('class', 'smi_event_what');
+	what.appendChild(document.createTextNode(summ + ' ' + desc));
 
 	var when = document.createElement('div');
 	when.setAttribute('class', 'smi_event_when');
@@ -28,11 +33,9 @@ function smi_format_event(e){
 	div.setAttribute('id', uid);
 
 	div.appendChild(anchor);
+	div.appendChild(what);
 	div.appendChild(when);
 	div.appendChild(where);
-
-	// var pp = prettyPrint(e);
-	// document.getElementById('smi_events').appendChild(pp);
 
 	return div;
 }
